@@ -1,12 +1,22 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreOnExistingDb
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static async Task<int> Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var context = new MweDbContext(new DbContextOptionsBuilder<MweDbContext>()
+                .UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=EfCoreMWE;Integrated Security=True")
+                .Options);
+
+            var foo = await context.Foos.SingleAsync(f => f.FooId == 1);
+
+            Console.WriteLine(foo.Bar.Baz);
+
+            return 0;
         }
     }
 }

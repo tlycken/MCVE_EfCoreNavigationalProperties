@@ -7,12 +7,13 @@ namespace EFCoreOnExistingDb.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long FooId { get; set; }
+        public int FooId { get; set; }
 
         [Required]
         public string Qux { get; set; }
 
         [Required]
+        [ForeignKey("Bar_BarId")]
         public Bar Bar { get; set; }
     }
 
@@ -20,7 +21,7 @@ namespace EFCoreOnExistingDb.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long BarId { get; set; }
+        public int BarId { get; set; }
 
         [Required]
         public string Baz { get; set; }
